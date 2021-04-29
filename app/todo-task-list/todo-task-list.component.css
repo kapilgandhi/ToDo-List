@@ -1,0 +1,15 @@
+button {
+    margin-left: 10px;
+}
+
+.list-alignment{
+    padding: 10px;
+}
+
+.container-alignment{
+    padding: 50px;
+}
+
+.checked {
+    text-decoration: line-through;
+}

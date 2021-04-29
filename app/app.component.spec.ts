@@ -37,45 +37,27 @@ describe('AppComponent', () => {
   it(`should add object to the list`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    app.newTodo = 'My First task is to clean';
+    app.todoListData.newTodo = 'My First task is to clean';
     app.addToList();
-    expect(app.todos.length).toEqual(1);
-  });
-
-  it(`should remove object from the list`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    app.removeItem(1);
-    expect(app.todos.length).toEqual(0);
-  });
-
-  it(`should mark task as completed from the list`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    const data = {
-      newTodo: 'My First task is to clean',
-      completed: false
-    };
-    app.itemCompleted(data, 0);
-    expect(app.todos[0].completed).toBeTruthy();
+    expect(app.todoListData.todos.length).toEqual(1);
   });
 
   it(`should edit the value`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    const data = 'My first Task is partially completed';
-    app.editItem(data, 0);
-    expect(app.newTodo).toEqual('My first Task is partially completed');
-    expect(app.editedItemIndex).toEqual(0);
+    const value = { item: { newTodo: 'My first Task is partially completed' }, index: 0 };
+    app.editItem(value);
+    expect(app.todoListData.newTodo).toEqual('My first Task is partially completed');
+    expect(app.todoListData.editedItemIndex).toEqual(0);
   });
 
   it(`should save the edited value`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    app.newTodo = 'My first Task is completed';
-    app.editedItemIndex = 0;
+    app.todoListData.newTodo = 'My first Task is completed';
+    app.todoListData.editedItemIndex = 0;
     app.saveToList();
-    expect(app.todos[0].newTodo).toEqual('My first Task is completed');
+    expect(app.todoListData.todos[0].newTodo).toEqual('My first Task is completed');
   });
 
 });
