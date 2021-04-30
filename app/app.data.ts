@@ -1,6 +1,6 @@
 export class AppData {
     newTodo = '';
-    todos: any;
+    todos: any = [];
     todoObj: any;
     editValue = false;
     editedItemIndex: any;
