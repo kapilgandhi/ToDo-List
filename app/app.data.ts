@@ -1,7 +1,9 @@
 export class AppData {
     newTodo = '';
-    todos: any;
+    priority: any;
+    todos: any[] = [];
     todoObj: any;
     editValue = false;
     editedItemIndex: any;
+    selectedAll = false;
 }

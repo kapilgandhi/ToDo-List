@@ -1,0 +1,22 @@
+button {
+	margin-left: 10px;
+}
+.list-alignment {
+	padding: 10px;
+}
+.selectLabelAll-alignment {
+	padding: 20px 0 13px 10px;
+}
+.checked {
+	text-decoration: line-through;
+}
+.selectLabelAll-alignment .form-check{
+    display: flex;
+}
+
+@media screen and (max-width: 600px) {
+	.close{
+		float: left;
+	}
+  }
+

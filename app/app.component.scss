@@ -1,0 +1,16 @@
+button {
+	margin-left: 10px;
+}
+.container-alignment {
+	padding: 50px 0 0 40px;
+}
+.container-height {
+	height: 400px;
+	overflow: auto;
+}
+
+@media screen and (max-width: 600px) {
+	.d-flex {
+		display: block!important;
+	}
+  }

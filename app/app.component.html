@@ -1,22 +1,35 @@
 <form autocomplete="off">
   <div class="container-alignment">
     <div class="row container d-flex justify-content-center">
-      <div class="col-md-10">
-        <div class="card px-3">
+      <div class="col-md-12 col-sm-10">
+        <div class="card px-3 container-height">
           <div class="card-body">
             <h4 class="card-title">{{title}}</h4>
             <div class="add-items d-flex">
-
-              <input matInput placeholder="Enter To do" class="form-control" [(ngModel)]="todoListData.newTodo" name="newTodo"
-                (keyup.enter)="todoListData.newTodo=''">
-              <button class="add btn btn-primary font-weight-bold todo-list-add-btn" (click)="addToList()"
-                *ngIf="!todoListData.editValue">Add</button>
-              <button class="add btn btn-success font-weight-bold todo-list-add-btn" (click)="saveToList()"
-                *ngIf="todoListData.editValue">Save</button>
+              <div class="pb-3 col-md-5 padding-left-0">
+                <input matInput placeholder="Enter To do" class="form-control" [(ngModel)]="todoListData.newTodo"
+                  name="newTodo" (keyup.enter)="todoListData.newTodo=''">
+              </div>
+              <div class="pb-3 col-md-5 padding-left-0">
+                <select class="form-control" name="priority" aria-label="Default select example" 
+                  [(ngModel)]="todoListData.priority">
+                  <option *ngFor="let item of priorityList" [ngValue]="item">
+                    {{ item }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-1 padding-left-0">
+                <button class="add btn btn-primary font-weight-bold todo-list-add-btn" (click)="addToList()"
+                  *ngIf="!todoListData.editValue">Add</button>
+                <button class="add btn btn-success font-weight-bold todo-list-add-btn" (click)="saveToList()"
+                  *ngIf="todoListData.editValue">Save</button>
+              </div>
             </div>
-
-            <div *ngIf="todoListData.todos.length > 0"> {{todoListData.todos.length}}
-              <app-todo-task-list [todoList]="todoListData.todos" (editTaskEmitter)="editItem($event)"></app-todo-task-list>
+            <div *ngIf="todoListData.todos.length > 0">
+              <app-todo-task-list [todoList]="todoListData.todos" 
+                                  (editTaskEmitter)="editItem($event)"
+                                  (deleteTaskEmitter)="deleteAllItems($event)">
+              </app-todo-task-list>
             </div>
           </div>
         </div>
