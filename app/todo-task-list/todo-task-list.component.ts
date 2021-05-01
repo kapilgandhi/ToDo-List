@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, HostListener } from '@angular/core';
 import { AppComponent } from '../app.component';
 
 @Component({
@@ -13,6 +13,14 @@ export class TodoTaskListComponent extends AppComponent {
   @Output() editTaskEmitter = new EventEmitter<object>();
   @Output() deleteTaskEmitter = new EventEmitter<boolean>();
 
+  @HostListener('window:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent): void {
+    if (event.key === 'Delete') {
+      this.deleteAll();
+    } else {
+      event.preventDefault();
+    }
+  }
 
   // remove item from the list
   // @index - pass index of item that needs to be removed

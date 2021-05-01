@@ -73,4 +73,18 @@ describe('TodoTaskListComponent', () => {
     component.deleteAll();
     expect(component.deleteTaskEmitter.emit).toThrowError();
   });
+
+  it('delete key pressed', () => {
+    const event = new KeyboardEvent('keydown', { key: 'Delete' });
+    spyOn(component, 'deleteAll');
+    component.handleKeyboardEvent(event);
+    expect(component.deleteAll).toHaveBeenCalled();
+  });
+
+  it('other  key pressed', () => {
+    const event = new KeyboardEvent('keydown', { key: 'Enter' });
+    spyOn(event, 'preventDefault');
+    component.handleKeyboardEvent(event);
+    expect(event.preventDefault).toHaveBeenCalled();
+  });
 });

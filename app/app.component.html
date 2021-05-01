@@ -7,14 +7,14 @@
             <h4 class="card-title">{{title}}</h4>
             <div class="add-items d-flex">
               <div class="pb-3 col-md-5 padding-left-0">
-                <input matInput placeholder="Enter To do" class="form-control" [(ngModel)]="todoListData.newTodo"
+                <input matInput placeholder="Enter To do Label" class="form-control" [(ngModel)]="todoListData.newTodo"
                   name="newTodo" (keyup.enter)="todoListData.newTodo=''">
               </div>
               <div class="pb-3 col-md-5 padding-left-0">
                 <select class="form-control" name="priority" aria-label="Default select example" 
                   [(ngModel)]="todoListData.priority">
-                  <option *ngFor="let item of priorityList" [ngValue]="item">
-                    {{ item }}
+                  <option *ngFor="let item of priorityList" [ngValue]="item" class="{{item}}">
+                    {{ item }} 
                   </option>
                 </select>
               </div>
