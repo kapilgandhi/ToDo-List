@@ -8,6 +8,15 @@ button {
 	height: 400px;
 	overflow: auto;
 }
+.High {
+	background-color: red;
+}
+.Medium {
+	background-color: orange;	
+}
+.Low{
+	background-color: lightseagreen;
+}
 
 @media screen and (max-width: 600px) {
 	.d-flex {

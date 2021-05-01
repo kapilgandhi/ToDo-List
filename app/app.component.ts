@@ -9,7 +9,7 @@ import { AppData } from './app.data';
 export class AppComponent implements OnInit {
   title = 'Todo list'; // Title name of component
 
-  public priorityList = ['Please select', 'High', 'Medium', 'Low'];
+  public priorityList = ['Please select priority', 'High', 'Medium', 'Low'];
 
   public todoListData: AppData = new AppData();
 
