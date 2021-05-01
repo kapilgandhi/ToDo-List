@@ -17,6 +17,6 @@ import { FormsModule } from '@angular/forms';
     FormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent, TodoTaskListComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
