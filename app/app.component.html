@@ -7,29 +7,23 @@
             <h4 class="card-title">{{title}}</h4>
             <div class="add-items d-flex">
               <div class="pb-3 col-md-5 padding-left-0">
-                <input matInput placeholder="Enter To do Label" class="form-control" [(ngModel)]="todoListData.newTodo"
-                  name="newTodo" (keyup.enter)="todoListData.newTodo=''">
+                <input matInput placeholder="Enter To do Label" class="form-control" [(ngModel)]="todoLabel"
+                  name="todoLabel" (keyup.enter)="todoLabel=''">
               </div>
               <div class="pb-3 col-md-5 padding-left-0">
-                <select class="form-control" name="priority" aria-label="Default select example" 
-                  [(ngModel)]="todoListData.priority">
+                <select class="form-control" name="priority" aria-label="Default select example" [(ngModel)]="priority">
                   <option *ngFor="let item of priorityList" [ngValue]="item" class="{{item}}">
-                    {{ item }} 
+                    {{ item }}
                   </option>
                 </select>
               </div>
               <div class="col-md-1 padding-left-0">
-                <button class="add btn btn-primary font-weight-bold todo-list-add-btn" (click)="addToList()"
-                  *ngIf="!todoListData.editValue">Add</button>
-                <button class="add btn btn-success font-weight-bold todo-list-add-btn" (click)="saveToList()"
-                  *ngIf="todoListData.editValue">Save</button>
+                <button class="add btn btn-primary font-weight-bold"
+                  (click)="addToList()">Add</button>
               </div>
             </div>
-            <div *ngIf="todoListData.todos.length > 0">
-              <app-todo-task-list [todoList]="todoListData.todos" 
-                                  (editTaskEmitter)="editItem($event)"
-                                  (deleteTaskEmitter)="deleteAllItems($event)">
-              </app-todo-task-list>
+            <div>
+              <app-todo-task-list [todo]="todoObj"></app-todo-task-list>
             </div>
           </div>
         </div>

@@ -9,13 +9,13 @@ button {
 	overflow: auto;
 }
 .High {
-	background-color: red;
+	color: red;
 }
 .Medium {
-	background-color: orange;	
+	color: orange;	
 }
 .Low{
-	background-color: lightseagreen;
+	color: lightseagreen;
 }
 
 @media screen and (max-width: 600px) {

@@ -21,12 +21,12 @@ describe('TodoTaskListComponent', () => {
     component = fixture.componentInstance;
     component.todoList = [{
       newTodo: 'My First task is to clean',
-      completed: false,
-      priority: 'High'
+      priority: 'High',
+      isEditable: false
     }, {
       newTodo: 'My Second task is to work',
-      completed: false,
-      priority: 'Medium'
+      priority: 'Medium',
+      isEditable: false
     }];
     fixture.detectChanges();
   });
@@ -35,18 +35,29 @@ describe('TodoTaskListComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should create todoList array', () => {
+    component.ngOnChanges();
+    expect(component).toBeTruthy();
+  });
+
+  it('should create todoList array', () => {
+    component.todo = {
+      id: component.i++,
+      completed: false,
+      isEditable: false
+    };
+    component.ngOnChanges();
+    expect(component).toBeTruthy();
+  });
+
   it(`should remove object from the list`, () => {
     component.removeItem(0);
     expect(component.todoList.length).toEqual(1);
   });
 
-  it(`should mark task as completed from the list`, () => {
-    const data = {
-      newTodo: 'My First task is to clean',
-      completed: false
-    };
-    component.itemCompleted(data, 0);
-    expect(component.todoListData.todos[0].completed).toBeTruthy();
+  it(`should remove object from the list`, () => {
+    component.removeItem(0);
+    expect(component.todoList.length).toEqual(1);
   });
 
   it(`should mark all task as completed from the list`, () => {
@@ -55,23 +66,16 @@ describe('TodoTaskListComponent', () => {
     expect(component.todoList[1].completed).toBeTruthy();
   });
 
-  it('should emit editted item on click', () => {
-    spyOn(component.editTaskEmitter, 'emit');
-    component.editTask(component.todoList[0], 0);
-    expect(component.editTaskEmitter.emit).toHaveBeenCalled();
-  });
-
   it('should emit deleteAll item on click', () => {
-    component.todoListData.selectedAll = true;
-    spyOn(component.deleteTaskEmitter, 'emit');
+    component.selectedAll = true;
     component.deleteAll();
-    expect(component.deleteTaskEmitter.emit).toHaveBeenCalled();
+    expect(component.todoList).toEqual([]);
   });
 
   it('should not emit deleteAll item on click', () => {
-    component.todoListData.selectedAll = false;
+    component.selectedAll = false;
     component.deleteAll();
-    expect(component.deleteTaskEmitter.emit).toThrowError();
+    expect(component.todoList).not.toEqual([]);
   });
 
   it('delete key pressed', () => {
@@ -81,10 +85,27 @@ describe('TodoTaskListComponent', () => {
     expect(component.deleteAll).toHaveBeenCalled();
   });
 
-  it('other  key pressed', () => {
+  it('other key pressed', () => {
     const event = new KeyboardEvent('keydown', { key: 'Enter' });
     spyOn(component, 'deleteAll');
     component.handleKeyboardEvent(event);
     expect(component.deleteAll).not.toHaveBeenCalled();
+  });
+
+  it('should inline edit if double click pressed', () => {
+    component.inlineEdit(component.todoList[0]);
+    expect(component.todoList[0].isEditable).toBeTruthy();
+  });
+
+  it('should cancel editing', () => {
+    component.todoList[0].isEditable = true;
+    component.cancelEditing(component.todoList[0]);
+    expect(component.todoList[0].isEditable).toBeFalsy;
+  });
+
+  it('should save to list edited item', () => {
+    component.todoList[0].isEditable = true,
+      component.saveToList(component.todoList[0], 0);
+    expect(component.todoList[0].isEditable).toBeFalsy();
   });
 });
