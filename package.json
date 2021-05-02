@@ -2,7 +2,7 @@
   "name": "my-app",
   "version": "1.0.0",
   "engines": {
-    "node": "13.14.10"
+    "node": "6.11.1"
   },
   "scripts": {
     "ng": "ng",
