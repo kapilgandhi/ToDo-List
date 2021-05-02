@@ -1,4 +1,5 @@
 export class AppData {
+    id:string ='';
     newTodo = '';
     priority: any;
     todos: any[] = [];

@@ -18,7 +18,7 @@ export class TodoTaskListComponent extends AppComponent {
     if (event.key === 'Delete') {
       this.deleteAll();
     } else {
-      event.preventDefault();
+      return ;
     }
   }
 

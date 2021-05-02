@@ -35,6 +35,7 @@ describe('AppComponent', () => {
 
   it(`should add object to the list`, () => {
     app.todoListData = {
+      id: '',
       newTodo: 'My First task is to clean',
       priority: 'High',
       todoObj: {},

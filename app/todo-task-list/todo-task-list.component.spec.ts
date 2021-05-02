@@ -83,8 +83,8 @@ describe('TodoTaskListComponent', () => {
 
   it('other  key pressed', () => {
     const event = new KeyboardEvent('keydown', { key: 'Enter' });
-    spyOn(event, 'preventDefault');
+    spyOn(component, 'deleteAll');
     component.handleKeyboardEvent(event);
-    expect(event.preventDefault).toHaveBeenCalled();
+    expect(component.deleteAll).not.toHaveBeenCalled();
   });
 });

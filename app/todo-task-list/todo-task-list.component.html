@@ -7,12 +7,12 @@
                         (click)="selectAllItems()" />
                     <label>Select All</label>
                 </div>
-                </div>
+            </div>
         </div>
     </div>
     <div class="list-alignment" *ngFor="let item of todoList;  let i = index">
         <div class="col-md-10">
-            <div class="form-check">
+            <div class="form-check" id={{item.id}}>
                 <input type="checkbox" class="form-check-input" id="checkbox-{{i}}" name="checkbox-{{i}}" value="{{i}}"
                     [(ngModel)]="item.isChecked" (click)="itemCompleted(item,i)" />
                 <label [ngClass]="{'checked': item.completed}" for="{{i}}" class="col-md-4">{{item.newTodo}}</label>

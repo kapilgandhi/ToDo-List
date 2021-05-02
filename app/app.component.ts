@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
   public priorityList = ['Please select priority', 'High', 'Medium', 'Low'];
 
   public todoListData: AppData = new AppData();
+  public i = 0;
 
   ngOnInit(): void {
     this.todoListData.priority = this.priorityList[0];
@@ -21,6 +22,7 @@ export class AppComponent implements OnInit {
   public addToList(): void {
     if (this.todoListData.newTodo !== '' && this.todoListData.priority !== '' && this.todoListData.priority !== this.priorityList[0]) {
       this.todoListData.todoObj = {
+        id: 'todoTask_' + this.i++,
         newTodo: this.todoListData.newTodo,
         completed: false,
         priority: this.todoListData.priority
