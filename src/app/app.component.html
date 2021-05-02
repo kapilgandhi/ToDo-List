@@ -1,46 +1,30 @@
 <form autocomplete="off">
   <div class="container-alignment">
     <div class="row container d-flex justify-content-center">
-      <div class="col-md-10">
-        <div class="card px-3">
+      <div class="col-md-12 col-sm-10">
+        <div class="card px-3 container-height">
           <div class="card-body">
             <h4 class="card-title">{{title}}</h4>
             <div class="add-items d-flex">
-
-              <input matInput placeholder="Enter To do" class="form-control" 
-                [(ngModel)]="newTodo" 
-                name="newTodo"
-                (keyup.enter)="newTodo=''">
-              <button class="add btn btn-primary font-weight-bold todo-list-add-btn"
-                (click)="addToList()" *ngIf="!editValue">Add</button>
-              <button class="add btn btn-success font-weight-bold todo-list-add-btn"
-                (click)="saveToList()" *ngIf="editValue">Save</button>
-            </div>
-
-
-            <div class="list-wrapper">
-              <div class="list-alignment" *ngFor="let item of todos;  let i = index">
-                <div class="col-md-10">
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="checkbox-{{i}}" 
-                     [(ngModel)]="item.completed" 
-                        name="checkbox-{{i}}"
-                        value="{{i}}"
-                      (click)="itemCompleted(item,i)"/>
-                    <label [ngClass]="{'checked': item.completed}" for="{{i}}">{{ item.newTodo }}</label>
-                    <button type="button" class="close" aria-label="Close" title="close" (click)="removeItem(i)">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                    <button type="button" class="close" aria-label="edit" title="Edit" (click)="editItem(item.newTodo,i)">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-                        <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
-                      </svg>
-                    </button>                 
-                  </div>
-                </div>
+              <div class="pb-3 col-md-5 padding-left-0">
+                <input matInput placeholder="Enter To do Label" class="form-control" [(ngModel)]="todoLabel"
+                  name="todoLabel" (keyup.enter)="todoLabel=''">
+              </div>
+              <div class="pb-3 col-md-5 padding-left-0">
+                <select class="form-control" name="priority" aria-label="Default select example" [(ngModel)]="priority">
+                  <option *ngFor="let item of priorityList" [ngValue]="item" class="{{item}}">
+                    {{ item }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-1 padding-left-0">
+                <button class="add btn btn-primary font-weight-bold"
+                  (click)="addToList()">Add</button>
               </div>
             </div>
-
+            <div>
+              <app-todo-task-list [todo]="todoObj"></app-todo-task-list>
+            </div>
           </div>
         </div>
       </div>

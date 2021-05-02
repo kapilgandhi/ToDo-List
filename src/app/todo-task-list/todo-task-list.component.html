@@ -1,0 +1,45 @@
+<div class="list-wrapper">
+    <div class="selectLabelAll-alignment" *ngIf="todoList.length > 1">
+        <div class="col-md-10 padding-left-0">
+            <div class="form-check displayInline">
+                <div class="col-md-6 col-sm-10 padding-left-0">
+                    <input type="checkbox" class="form-check-input" id="checkbox" name="checkbox"
+                        (click)="selectAllItems()" />
+                    <label>Select All</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="list-alignment" *ngFor="let item of todoList;  let i = index">
+        <div class="col-md-10 padding-left-0">
+            <div class="form-check" id={{item.id}}>
+                <input type="checkbox" class="form-check-input" id="checkbox-{{i}}" name="checkbox-{{i}}" value="{{i}}"
+                    [(ngModel)]="item.isChecked">
+                <label *ngIf="!item.isEditable" [ngClass]="{'checked': item.completed}" for="{{i}}" class="col-md-4"
+                    (dblclick)="inlineEdit(item)">{{item.newTodo}}</label>
+                <label *ngIf="!item.isEditable" [ngClass]="{'checked': item.completed}" for="{{i}}"
+                    class="col-md-4" (dblclick)="inlineEdit(item)">{{item.priority}}</label>
+                <button *ngIf="!item.isEditable" type="button" class="close" aria-label="Close" title="close"
+                    (click)="removeItem(i)">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div *ngIf="item.isEditable" class="displayInline pb-3 ">
+                    <div class="col-md-5 padding-left-0">
+                        <input matInput class="form-control" [(ngModel)]="item.newTodo" name="newTodo">
+                    </div>
+                    <div class="col-md-5 padding-left-0">
+                        <select class="form-control" name="priority" aria-label="Default select example"
+                            [(ngModel)]="item.priority">
+                            <option *ngFor="let item of priorityList" [ngValue]="item" class="{{item}}">
+                                {{ item }}
+                            </option>
+                        </select>
+                    </div>
+                    <button class="add btn btn-primary font-weight-bold" (click)="saveToList(item, i)">Save</button>
+                    <button class="add btn btn-danger font-weight-bold" (click)="cancelEditing(item)">Cancel</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
