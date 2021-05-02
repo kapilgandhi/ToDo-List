@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, HostListener, OnChanges } from '@angular/core';
 import { AppComponent } from '../app.component';
 
 @Component({
@@ -7,18 +7,34 @@ import { AppComponent } from '../app.component';
   styleUrls: ['./todo-task-list.component.scss']
 })
 
-export class TodoTaskListComponent extends AppComponent {
+export class TodoTaskListComponent extends AppComponent implements OnChanges {
 
-  @Input() public todoList: any;
-  @Output() editTaskEmitter = new EventEmitter<object>();
-  @Output() deleteTaskEmitter = new EventEmitter<boolean>();
+  @Input() public todo: any;
+
+  public todoList: any[] = [];
+  public selectedAll = false;
+  public i = 0;
 
   @HostListener('window:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent): void {
     if (event.key === 'Delete') {
       this.deleteAll();
     } else {
-      event.preventDefault();
+      return;
+    }
+  }
+
+  ngOnChanges(): void {
+    if (this.todo) {
+      this.todo = {
+        ...this.todo,
+        id: this.i++,
+        completed: false,
+        isEditable: false
+      };
+      this.todoList.push(this.todo);
+    } else {
+      return;
     }
   }
 
@@ -27,31 +43,32 @@ export class TodoTaskListComponent extends AppComponent {
   public removeItem(index: number): void {
     this.todoList.splice(index, 1);
   }
-
-  // check if item is checked, if checked then mark item as completed
-  // @item - pass item object which is checked
-  // @index - pass index of item that needs to be marked as completed
-  public itemCompleted(item: any, index: any): void {
-    this.todoListData.todoObj = item;
-    this.todoListData.todoObj.completed = !item.completed;
-    this.todoListData.todos[index] = this.todoListData.todoObj;
-  }
-
-  public editTask(item: object, index: number): void {
-    this.editTaskEmitter.emit({ item, index });
-  }
-
+  // select all items in the list
   public selectAllItems(): void {
     this.todoList.forEach((x: { isChecked: boolean; completed: any; }) => {
       x.isChecked = !x.completed;
       x.completed = !x.completed;
     });
-    this.todoListData.selectedAll = !this.todoListData.selectedAll;
+    this.selectedAll = !this.selectedAll;
   }
-
+  // delete all selected items when delete key is pressed
   public deleteAll(): void {
-    if (this.todoListData.selectedAll) {
-      this.deleteTaskEmitter.emit(true);
+    if (this.selectedAll) {
+      this.todoList = [];
+      this.i = 0;
     }
+  }
+  // edit the item if double click
+  public inlineEdit(item: any): void {
+    item.isEditable = true;
+  }
+  // cancel the editing double click item
+  public cancelEditing(item: any): void {
+    item.isEditable = false;
+  }
+  // save the new updated value
+  public saveToList(item: any, i: number): void {
+    item.isEditable = false;
+    this.todoList[i] = item;
   }
 }
