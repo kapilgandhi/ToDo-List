@@ -24,7 +24,7 @@ For generating the coverage report please run `ng test --no-watch --code-coverag
 
 ## Running lint
 
-To run lint run cmd `ng lint`
+To run lint: run cmd `ng lint`
 
 ## Further help
 
