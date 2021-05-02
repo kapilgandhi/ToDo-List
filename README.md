@@ -29,3 +29,9 @@ To run lint run cmd `ng lint`
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Features
+
+`Double click on label for Inline Editing.`
+`Select all checkbox will only appear if the list is having more than 1 Todo.`
+`Delete key will only work if select all checkbox is selected.`
